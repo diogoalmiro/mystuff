@@ -33,9 +33,7 @@ var Send = (function(){
 	function Request(method, url, callback, progress){
 		var req = new XMLHttpRequest();
 		req.open(method, url, true);
-		this.send = function(formData){
-			req.send( formData );
-		}
+
 		req.onreadystatechange = function() {
 			if( req.readyState == 4 )
 				callback( req.responseText, req.status );
@@ -44,10 +42,13 @@ var Send = (function(){
 			req.upload.onprogress = function(e) {
 				progress(e);
 			}
+
+		this.send = function(formData){
+			req.send( formData );
+		}
 	}
 	
-	var Send = {};
-	Send.setForm = function(formElement, callback, progress){
+	function setFormSubmition = function(formElement, callback, progress){
 		formElement.onsubmit = function() {
 			 new Request(
 				formElement.method,
@@ -65,14 +66,18 @@ var Send = (function(){
 	/**
 	 ** Not tested yet
 	 **/
-	Send.setOnclick = function(element, method, url, callback) {
+	function setOnclick = function(element, method, url, callback) {
 		element.onclick = function(){
 			new Request(method, url, callback).send();
 			return false;
 		}
 	} 
-	Send.Request = Request;
-	return Send;
+
+	return {
+		Request : Request,
+		setFormSubmition : setFormSubmition,
+		setOnclick : setOnclick
+	};
 
 })()
 
