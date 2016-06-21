@@ -1,11 +1,14 @@
 /**
  * Send.js is an object to make the use of XMLHttpRequest easier.
  * 
- * > Send
- * Object {}
- * 	Request : (method, url, callback[, progress])
- *	setForm : (formElement, callback[, progress])
- *	setOnclick : (element, method, url, callback)
+ * > Send.Request {constructor}
+ * 	Request(method, url, callback[, progress])
+ * 
+ * > Send.setFormSubmition {function}
+ * 	setFormSubmition(formElement, callback[, progress])
+ *
+ * > Send.setOnclik {function}
+ * 	setOnclick(element, method, url, callback)
  * 
  * Usage:
  * 	var request = new Send.Request("GET","/",function(response, status){...}, function(e){...})
