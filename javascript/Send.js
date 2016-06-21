@@ -48,7 +48,7 @@ var Send = (function(){
 		}
 	}
 	
-	function setFormSubmition = function(formElement, callback, progress){
+	function setFormSubmition(formElement, callback, progress){
 		formElement.onsubmit = function() {
 			 new Request(
 				formElement.method,
@@ -63,10 +63,7 @@ var Send = (function(){
 		}
 	}
 
-	/**
-	 ** Not tested yet
-	 **/
-	function setOnclick = function(element, method, url, callback) {
+	function setOnclick(element, method, url, callback) {
 		element.onclick = function(){
 			new Request(method, url, callback).send();
 			return false;
