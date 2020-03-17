@@ -52,6 +52,19 @@ var Send = (function(){
 	}
 	
 	function setFormSubmition(formElement, callback, progress){
+		formElement.addEventListener("submit", function(e){
+			e.preventDefault();
+			new Request(
+				formElement.method,
+				formElement.action,
+				function(res, status){
+					callback(res, status);
+					formElement.reset();
+				},
+				progress
+			).send(new FormData(formElement));
+		});
+		/*
 		formElement.onsubmit = function() {
 			 new Request(
 				formElement.method,
@@ -64,13 +77,24 @@ var Send = (function(){
 			).send(new FormData(this));
 			return false;
 		}
+		*/
 	}
 
 	function setOnclick(element, method, url, callback) {
+		element.addEventListener("click", function(e){
+			e.preventDefault();
+			new Request(
+				method,
+				url,
+				callback
+			).send()
+		})
+		/*
 		element.onclick = function(){
 			new Request(method, url, callback).send();
 			return false;
 		}
+		*/
 	} 
 
 	return {
